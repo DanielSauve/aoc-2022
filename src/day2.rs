@@ -1,7 +1,7 @@
 pub fn day2part1(input: &str) -> i32 {
-    let split = input.split('\n');
+    let lines = input.lines();
     let mut score = 0;
-    for round in split {
+    for round in lines {
         let (opp, mut my) = round.split_at(1);
         my = my.strip_prefix(' ').unwrap();
         match my {
@@ -42,9 +42,9 @@ pub fn day2part1(input: &str) -> i32 {
 }
 
 pub fn day2part2(input: &str) -> i32 {
-    let split = input.split('\n');
+    let lines = input.lines();
     let mut score = 0;
-    for round in split {
+    for round in lines {
         let (opp, mut my) = round.split_at(1);
         my = my.strip_prefix(' ').unwrap();
         match my {

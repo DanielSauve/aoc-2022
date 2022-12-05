@@ -14,14 +14,31 @@ fn parse_line(pairing: &str) -> (u32, u32, u32, u32) {
     )
 }
 
+fn check_overlap(
+    first_lower: u32,
+    first_upper: u32,
+    second_lower: u32,
+    second_upper: u32,
+    second_outer_bound: u32,
+    first_outer_bound: u32,
+) -> bool {
+    (first_lower <= second_lower && first_upper >= second_outer_bound)
+        || (second_lower <= first_lower && second_upper >= first_outer_bound)
+}
+
 pub fn day4part1(input: &str) -> u32 {
     let lines = input.lines();
     let mut score = 0;
     for pairing in lines {
         let (first_lower, first_upper, second_lower, second_upper) = parse_line(pairing);
-        if (first_lower <= second_lower && first_upper >= second_upper)
-            || (second_lower <= first_lower && second_upper >= first_upper)
-        {
+        if check_overlap(
+            first_lower,
+            first_upper,
+            second_lower,
+            second_upper,
+            second_upper,
+            first_upper,
+        ) {
             score += 1;
         }
     }
@@ -33,9 +50,14 @@ pub fn day4part2(input: &str) -> u32 {
     let mut score = 0;
     for pairing in lines {
         let (first_lower, first_upper, second_lower, second_upper) = parse_line(pairing);
-        if (first_lower <= second_lower && first_upper >= second_lower)
-            || (second_lower <= first_lower && second_upper >= first_lower)
-        {
+        if check_overlap(
+            first_lower,
+            first_upper,
+            second_lower,
+            second_upper,
+            second_lower,
+            first_lower,
+        ) {
             score += 1;
         }
     }

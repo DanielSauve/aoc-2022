@@ -1,5 +1,4 @@
 use regex::Regex;
-use std::borrow::BorrowMut;
 use std::collections::VecDeque;
 
 fn parse_header<'a>(
@@ -46,7 +45,7 @@ fn get_output(stacks: Vec<VecDeque<&str>>) -> String {
 pub fn day5part1(input: &str) -> String {
     let mut lines = input.lines();
 
-    let (mut stacks, lines) = parse_header(lines.borrow_mut());
+    let (mut stacks, lines) = parse_header(&mut lines);
     for line in lines {
         let mut split = line.split(' ');
         let count: u32 = split.nth(1).unwrap().parse().unwrap();
@@ -65,7 +64,7 @@ pub fn day5part1(input: &str) -> String {
 pub fn day5part2(input: &str) -> String {
     let mut lines = input.lines();
 
-    let (mut stacks, lines) = parse_header(lines.borrow_mut());
+    let (mut stacks, lines) = parse_header(&mut lines);
     for line in lines {
         let mut split = line.split(' ');
         let count: u32 = split.nth(1).unwrap().parse().unwrap();

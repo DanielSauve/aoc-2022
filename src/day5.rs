@@ -1,10 +1,12 @@
-use regex::{Match, Regex};
-use std::collections::{vec_deque, VecDeque};
-pub fn day5part1(input: &str) -> u32 {
-    let mut lines = input.lines();
-    let mut score = 0;
+use regex::Regex;
+use std::borrow::BorrowMut;
+use std::collections::VecDeque;
+
+fn parse_header<'a>(
+    lines: &'a mut core::str::Lines<'a>,
+) -> (Vec<VecDeque<&'a str>>, &'a mut core::str::Lines<'a>) {
     let mut stacks: Vec<VecDeque<&str>> = vec![];
-    for x in 0..9 {
+    for _ in 0..9 {
         stacks.push(VecDeque::new());
     }
     loop {
@@ -30,6 +32,21 @@ pub fn day5part1(input: &str) -> u32 {
             current = next.unwrap();
         }
     }
+    (stacks, lines)
+}
+
+fn get_output(stacks: Vec<VecDeque<&str>>) -> String {
+    let mut output: String = String::new();
+    for mut x in stacks {
+        output.push_str(x.pop_back().unwrap());
+    }
+    output
+}
+
+pub fn day5part1(input: &str) -> String {
+    let mut lines = input.lines();
+
+    let (mut stacks, lines) = parse_header(lines.borrow_mut());
     for line in lines {
         let mut split = line.split(' ');
         let count: u32 = split.nth(1).unwrap().parse().unwrap();
@@ -42,43 +59,13 @@ pub fn day5part1(input: &str) -> u32 {
             stacks[to].push_back(temp);
         }
     }
-    for mut x in stacks {
-        print!("{}", x.pop_back().unwrap());
-    }
-    println!("");
-    score
+    get_output(stacks)
 }
 
-pub fn day5part2(input: &str) -> u32 {
+pub fn day5part2(input: &str) -> String {
     let mut lines = input.lines();
-    let mut score = 0;
-    let mut stacks: Vec<VecDeque<&str>> = vec![];
-    for x in 0..9 {
-        stacks.push(VecDeque::new());
-    }
-    loop {
-        let line = lines.next().unwrap();
-        if line.is_empty() {
-            break;
-        }
-        let mut current = line.get(0..3).unwrap();
-        let mut i = 0usize;
-        let mut curr_char = 0usize;
-        loop {
-            let thing = current.get(1..2).unwrap();
-            let re = Regex::new(r"[A-Z]").unwrap();
-            if re.is_match(thing) {
-                stacks[i].push_front(thing);
-            }
-            i += 1;
-            curr_char += 4;
-            let next = line.get(curr_char..curr_char + 3);
-            if next.is_none() {
-                break;
-            }
-            current = next.unwrap();
-        }
-    }
+
+    let (mut stacks, lines) = parse_header(lines.borrow_mut());
     for line in lines {
         let mut split = line.split(' ');
         let count: u32 = split.nth(1).unwrap().parse().unwrap();
@@ -94,9 +81,5 @@ pub fn day5part2(input: &str) -> u32 {
             stacks[to].push_back(temp_stack.pop().unwrap());
         }
     }
-    for mut x in stacks {
-        print!("{}", x.pop_back().unwrap());
-    }
-    println!("");
-    score
+    get_output(stacks)
 }

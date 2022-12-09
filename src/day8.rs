@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-pub fn day8part1(input: &str) -> usize {
+fn parse_input(input: &str) -> Vec<Vec<i32>> {
     let mut forest: Vec<Vec<i32>> = vec![];
     for line in input.lines() {
         forest.push(vec![]);
@@ -9,9 +9,14 @@ pub fn day8part1(input: &str) -> usize {
             current.push(height.to_digit(10).unwrap() as i32);
         }
     }
+    forest
+}
+
+pub fn day8part1(input: &str) -> usize {
+    let forest: Vec<Vec<i32>> = parse_input(input);
     let mut visible_set: HashSet<(usize, usize)> = HashSet::new();
     let mut visible = 0;
-    let (mut x, mut y) = (0usize, 0usize);
+    let (mut x, mut y) = (0, 0);
     while y < forest.len() {
         let mut curr_height = -1;
         while x < forest[y].len() {
@@ -28,7 +33,7 @@ pub fn day8part1(input: &str) -> usize {
         y += 1;
         x = 0;
     }
-    let (mut x, mut y) = (0usize, 0usize);
+    let (mut x, mut y) = (0, 0);
     while x < forest[y].len() {
         let mut curr_height = -1;
         while y < forest.len() {
@@ -82,6 +87,69 @@ pub fn day8part1(input: &str) -> usize {
     visible_set.len()
 }
 
+fn calculate_scenic_score(forest: &[Vec<i32>], tree_x: usize, tree_y: usize) -> u32 {
+    let curr_tree_height = forest[tree_y][tree_x];
+    let mut x = tree_x + 1;
+    let mut right_score = 0;
+    while x < forest[tree_y].len() {
+        right_score += 1;
+
+        if forest[tree_y][x] >= curr_tree_height {
+            break;
+        }
+        x += 1;
+    }
+    let mut left_score = 0;
+    if tree_x != 0 {
+        let mut x = tree_x - 1;
+        loop {
+            left_score += 1;
+
+            if forest[tree_y][x] >= curr_tree_height || x == 0 {
+                break;
+            }
+            x -= 1;
+        }
+    }
+    let mut y = tree_y + 1;
+    let mut below_score = 0;
+    while y < forest.len() {
+        below_score += 1;
+
+        if forest[y][tree_x] >= curr_tree_height {
+            break;
+        }
+        y += 1;
+    }
+    let mut above_score = 0;
+    if tree_y != 0 {
+        let mut y = tree_y - 1;
+        loop {
+            above_score += 1;
+
+            if forest[y][tree_x] >= curr_tree_height || y == 0 {
+                break;
+            }
+            y -= 1;
+        }
+    }
+    right_score * left_score * above_score * below_score
+}
+
 pub fn day8part2(input: &str) -> u32 {
-    0
+    let forest: Vec<Vec<i32>> = parse_input(input);
+    let mut highscore = 0;
+    let (mut x, mut y) = (0, 0);
+    while y < forest.len() {
+        while x < forest.len() {
+            let score = calculate_scenic_score(&forest, x, y);
+            if score > highscore {
+                highscore = score;
+            }
+            x += 1;
+        }
+        y += 1;
+        x = 0;
+    }
+    highscore
 }

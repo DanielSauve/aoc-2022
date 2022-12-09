@@ -20,10 +20,10 @@ pub fn day7part1(input: &str) -> u32 {
     let mut curr = tree.root();
     for line in input.lines().skip(2) {
         if UP.is_match(line) {
-            curr = curr.parent().unwrap();
+            // curr = curr.parent().unwrap();
         }
         if CD.is_match(line) {
-            println!("{line}");
+            // println!("{line}");
             break;
         } else if LS.is_match(line) {
             continue;

@@ -4,6 +4,7 @@ mod day3;
 mod day4;
 mod day5;
 mod day6;
+mod day7;
 
 use crate::day1::{day1part1, day1part2};
 use crate::day2::{day2part1, day2part2};
@@ -11,6 +12,7 @@ use crate::day3::{day3part1, day3part2};
 use crate::day4::{day4part1, day4part2};
 use crate::day5::{day5part1, day5part2};
 use crate::day6::{day6part1, day6part2};
+use crate::day7::{day7part1, day7part2};
 use std::fs::read_to_string;
 
 fn main() {
@@ -33,4 +35,7 @@ fn main() {
     let s = read_to_string("input/day6.txt").expect("Unable to open file.");
     println!("Day 6 Part 1: {}", day6part1(&s));
     println!("Day 6 Part 2: {}", day6part2(&s));
+    let s = read_to_string("input/day7.txt").expect("Unable to open file.");
+    println!("Day 7 Part 1: {}", day7part1(&s));
+    println!("Day 7 Part 2: {}", day7part2(&s));
 }

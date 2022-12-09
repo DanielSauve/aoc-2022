@@ -45,6 +45,5 @@ pub fn day7part1(input: &str) -> u32 {
 }
 
 pub fn day7part2(input: &str) -> u32 {
-    let mut index = 14;
-    index
+    0
 }

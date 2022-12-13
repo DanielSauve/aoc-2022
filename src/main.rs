@@ -7,6 +7,9 @@ mod day6;
 mod day7;
 mod day8;
 mod day9;
+mod day10;
+mod day11;
+mod day12;
 
 use crate::day1::{day1part1, day1part2};
 use crate::day2::{day2part1, day2part2};
@@ -17,6 +20,9 @@ use crate::day6::{day6part1, day6part2};
 use crate::day7::{day7part1, day7part2};
 use crate::day8::{day8part1, day8part2};
 use crate::day9::{day9part1, day9part2};
+use crate::day10::{day10part1, day10part2};
+use crate::day11::{day11part1, day11part2};
+use crate::day12::{day12part1, day12part2};
 use std::fs::read_to_string;
 
 fn main() {
@@ -48,4 +54,13 @@ fn main() {
     let s = read_to_string("input/day9.txt").expect("Unable to open file.");
     println!("Day 9 Part 1: {}", day9part1(&s));
     println!("Day 9 Part 2: {}", day9part2(&s));
+    let s = read_to_string("input/day10.txt").expect("Unable to open file.");
+    println!("Day 9 Part 1: {}", day10part1(&s));
+    println!("Day 9 Part 2: {}", day10part2(&s));
+    let s = read_to_string("input/day11.txt").expect("Unable to open file.");
+    println!("Day 9 Part 1: {}", day11part1(&s));
+    println!("Day 9 Part 2: {}", day11part2(&s));
+    let s = read_to_string("input/day12.txt").expect("Unable to open file.");
+    println!("Day 9 Part 1: {}", day12part1(&s));
+    println!("Day 9 Part 2: {}", day12part2(&s));
 }

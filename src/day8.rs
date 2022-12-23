@@ -15,13 +15,11 @@ fn parse_input(input: &str) -> Vec<Vec<i32>> {
 pub fn day8part1(input: &str) -> usize {
     let forest: Vec<Vec<i32>> = parse_input(input);
     let mut visible_set: HashSet<(usize, usize)> = HashSet::new();
-    let mut visible = 0;
     let (mut x, mut y) = (0, 0);
     while y < forest.len() {
         let mut curr_height = -1;
         while x < forest[y].len() {
             if forest[y][x] > curr_height {
-                visible += 1;
                 visible_set.insert((x, y));
                 curr_height = forest[y][x];
             }
@@ -38,7 +36,6 @@ pub fn day8part1(input: &str) -> usize {
         let mut curr_height = -1;
         while y < forest.len() {
             if forest[y][x] > curr_height {
-                visible += 1;
                 visible_set.insert((x, y));
                 curr_height = forest[y][x];
             }
@@ -55,7 +52,6 @@ pub fn day8part1(input: &str) -> usize {
         let mut curr_height = -1;
         loop {
             if forest[y][x] > curr_height {
-                visible += 1;
                 visible_set.insert((x, y));
                 curr_height = forest[y][x];
             }
@@ -72,7 +68,6 @@ pub fn day8part1(input: &str) -> usize {
         let mut curr_height = -1;
         loop {
             if forest[y][x] > curr_height {
-                visible += 1;
                 visible_set.insert((x, y));
                 curr_height = forest[y][x];
             }

@@ -36,3 +36,21 @@ pub fn day6part2(input: &str) -> u32 {
     }
     index
 }
+
+#[cfg(test)]
+mod test {
+    use crate::day6::{day6part1, day6part2};
+    use std::fs::read_to_string;
+
+    #[test]
+    fn part1test() {
+        let s = read_to_string("test_input/day6.txt").expect("Unable to open file.");
+        assert_eq!(day6part1(&s), 7);
+    }
+
+    #[test]
+    fn part2test() {
+        let s = read_to_string("test_input/day6.txt").expect("Unable to open file.");
+        assert_eq!(day6part2(&s), 19);
+    }
+}

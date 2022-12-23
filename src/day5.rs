@@ -82,3 +82,21 @@ pub fn day5part2(input: &str) -> String {
     }
     get_output(stacks)
 }
+
+// #[cfg(test)]
+// mod test {
+//     use crate::day5::{day5part1, day5part2};
+//     use std::fs::read_to_string;
+//
+//     #[test]
+//     fn part1test() {
+//         let s = read_to_string("test_input/day5.txt").expect("Unable to open file.");
+//         assert_eq!(day5part1(&s), "CMZ");
+//     }
+//
+//     #[test]
+//     fn part2test() {
+//         let s = read_to_string("test_input/day5.txt").expect("Unable to open file.");
+//         assert_eq!(day5part2(&s), "MCD");
+//     }
+// }

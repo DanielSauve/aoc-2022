@@ -82,3 +82,21 @@ pub fn day2part2(input: &str) -> i32 {
     }
     score
 }
+
+#[cfg(test)]
+mod test {
+    use crate::day2::{day2part1, day2part2};
+    use std::fs::read_to_string;
+
+    #[test]
+    fn part1test() {
+        let s = read_to_string("test_input/day2.txt").expect("Unable to open file.");
+        assert_eq!(day2part1(&s), 15);
+    }
+
+    #[test]
+    fn part2test() {
+        let s = read_to_string("test_input/day2.txt").expect("Unable to open file.");
+        assert_eq!(day2part2(&s), 12);
+    }
+}

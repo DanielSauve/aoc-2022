@@ -63,3 +63,21 @@ pub fn day4part2(input: &str) -> u32 {
     }
     score
 }
+
+#[cfg(test)]
+mod test {
+    use crate::day4::{day4part1, day4part2};
+    use std::fs::read_to_string;
+
+    #[test]
+    fn part1test() {
+        let s = read_to_string("test_input/day4.txt").expect("Unable to open file.");
+        assert_eq!(day4part1(&s), 2);
+    }
+
+    #[test]
+    fn part2test() {
+        let s = read_to_string("test_input/day4.txt").expect("Unable to open file.");
+        assert_eq!(day4part2(&s), 4);
+    }
+}

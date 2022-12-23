@@ -153,3 +153,21 @@ pub fn day8part2(input: &str) -> u32 {
     }
     highscore
 }
+
+#[cfg(test)]
+mod test {
+    use crate::day8::{day8part1, day8part2};
+    use std::fs::read_to_string;
+
+    #[test]
+    fn part1test() {
+        let s = read_to_string("test_input/day8.txt").expect("Unable to open file.");
+        assert_eq!(day8part1(&s), 21);
+    }
+
+    #[test]
+    fn part2test() {
+        let s = read_to_string("test_input/day8.txt").expect("Unable to open file.");
+        assert_eq!(day8part2(&s), 8);
+    }
+}
